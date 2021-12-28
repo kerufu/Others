@@ -1,0 +1,10 @@
+#!/bin/bash
+PASSWORD="Baoma20110326"
+DATABASE_PATH=$(echo $PASSWORD | sudo -S find /private/var/folders -name com.apple.dock.launchpad)
+rm ~/Library/Application\ Support/Dock/*.db
+for APP in "'Hearthstone'" "'StarCraft'" "'StarCraft II Editor'" "'Warcraft III'" "'Warcraft III Launcher'" "'Agent'"
+do
+	sqlite3 $DATABASE_PATH/db/db "DELETE FROM apps WHERE title=$APP;"
+	
+done
+killall Dock
